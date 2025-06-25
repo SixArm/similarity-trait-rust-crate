@@ -1,6 +1,18 @@
 //! # Similarity trait
 //!
-//! The Similarity trait defines one function with one input and one output.
+//! **[documentation](https://docs.rs/similarity-trait/)**
+//! •
+//! **[source](https://github.com/sixarm/similarity-trait-rust-crate/)**
+//! •
+//! **[llms.txt](https://raw.githubusercontent.com/sixarm/similarity-trait/refs/heads/main/llms.txt)**
+//! •
+//! **[crate](https://crates.io/crates/similarity-trait)**
+//! •
+//! **[email](mailto:joel@joelparkerhenderson.com)**
+//!
+//! The Similarity trait defines one function with one input and one output, so
+//! you can compare any kinds of input values and return any kind of output
+//! value.
 //!
 //! ```no_run
 //! pub trait Similarity<InputType, OutputType> {

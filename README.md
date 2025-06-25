@@ -154,7 +154,7 @@ Wikipedia links:
 
 - [Goodman and Kruskal's gamma](https://en.wikipedia.org/wiki/Goodman_and_Kruskal%27s_gamma)
 
-- [Pearson_correlation_coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) also known as product-moment correlation coefficient.
+- [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) also known as product-moment correlation coefficient.
 
 - [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index) also known as coefficient of community, intersection over union, ratio of verification, critical success index, Tanimoto index.
 
