@@ -26,6 +26,8 @@ We use this trait in our programs to create multiple kinds of similarity
 functionality, such as for trying various similarity algorithms that we want
 to use with the same input type and same output type.
 
+For examples, please see the directory [`examples`].
+
 ## Similarity of a pair
 
 One way to use this trait is to calculate the similarity of a pair of
@@ -63,9 +65,9 @@ Example: given numbers, then return the population standard deviation.
 use similarity_trait::Similarity;
 struct MyStruct;
 
-impl Similarity<Vec<f64>, Option<f64>> for MyStruct {
+impl Similarity<&Vec<f64>, Option<f64>> for MyStruct {
     /// Similarity of numbers via population standard deviation
-    fn similarity(numbers: Vec<f64>) -> Option<f64> {
+    fn similarity(numbers: &Vec<f64>) -> Option<f64> {
         if numbers.is_empty() { return None }
         let mean = numbers.iter().sum::<f64>() / numbers.len() as f64;
         let variance = numbers.iter().map(|x| (x - mean).powi(2)).sum::<f64>() / numbers.len() as f64;
@@ -74,9 +76,11 @@ impl Similarity<Vec<f64>, Option<f64>> for MyStruct {
 }
 
 let numbers = vec![2.0, 4.0, 4.0, 4.0, 5.0, 5.0, 7.0, 9.0];
-let standard_deviation = MyStruct::similarity(numbers).expect("similarity");
-assert!(standard_deviation > 1.999 && standard_deviation < 2.001);
+let population_standard_deviation = MyStruct::similarity(&numbers).expect("similarity");
+assert!(population_standard_deviation > 1.999 && population_standard_deviation < 2.001);
 ```
+
+For examples, please see the directory [`examples`].
 
 ## Similarity of a pair or a collection
 
