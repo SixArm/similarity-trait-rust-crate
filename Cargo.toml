@@ -1,7 +1,7 @@
 [package]
 name = "similarity-trait"
 description = "Similarity trait Rust crate: compare input values, such as two or more items, then return an output value, such as a mesure of similarity, or correlation, or overlap."
-version = "1.0.0"
+version = "2.0.0"
 edition = "2024"
 readme = "README.md"
 repository = "https://github.com/sixarm/similarity-trait-rust-crate/"

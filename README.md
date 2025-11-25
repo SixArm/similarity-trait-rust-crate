@@ -14,19 +14,11 @@ The Similarity trait defines one function with one input and one output, so
 you can compare any kinds of input values and return any kind of output
 value.
 
-```rust
-pub trait Similarity<InputType, OutputType> {
-    fn similarity(input: InputType) -> OutputType;
-}
-```
-
-This trait is purposefully very generic so you can use it as you wish.
-
 We use this trait in our programs to create multiple kinds of similarity
 functionality, such as for trying various similarity algorithms that we want
 to use with the same input type and same output type.
 
-For examples, please see the directory [`examples`].
+For examples, please see the directory [`examples`](examples).
 
 ## Similarity of a pair
 
@@ -38,18 +30,17 @@ This is sometimes known as pairwise similarity or pair matching.
 Example: given two numbers, then return the percent change.
 
 ```rust
-use similarity_trait::Similarity;
+use similarity_trait::*;
 struct MyStruct;
 
-impl Similarity<(i32, i32), f64> for MyStruct {
-    /// Similarity of numbers via percent change.
-    fn similarity(input: (i32, i32)) -> f64 {
-        (100.0 * (input.1 - input.0) as f64) / i32::abs(input.0) as f64
+impl SimilarityIO<(i32, i32), Option<i32>> for MyStruct {
+    fn similarity(input: (i32, i32)) -> Option<i32> {
+        Some(input.1.checked_sub(input.0)?.abs())
     }
 }
 
-let percent_change = MyStruct::similarity((100, 120));
-assert_eq!(percent_change, 20.0);
+let absolute_difference = MyStruct::similarity((100, 120));
+assert_eq!(absolute_difference, Some(20));
 ```
 
 ## Similarity of a collection
@@ -62,10 +53,10 @@ This is sometimes called intra-group similarity or statistical correlation.
 Example: given numbers, then return the population standard deviation.
 
 ```rust
-use similarity_trait::Similarity;
+use similarity_trait::SimilarityIO;
 struct MyStruct;
 
-impl Similarity<&Vec<f64>, Option<f64>> for MyStruct {
+impl SimilarityIO<&Vec<f64>, Option<f64>> for MyStruct {
     /// Similarity of numbers via population standard deviation
     fn similarity(numbers: &Vec<f64>) -> Option<f64> {
         if numbers.is_empty() { return None }
@@ -80,7 +71,7 @@ let population_standard_deviation = MyStruct::similarity(&numbers).expect("simil
 assert!(population_standard_deviation > 1.999 && population_standard_deviation < 2.001);
 ```
 
-For examples, please see the directory [`examples`].
+For examples, please see the directory [`examples`](examples).
 
 ## Similarity of a pair or a collection
 
@@ -90,10 +81,10 @@ pair (such as two strings) or a collection (such as a vector of strings).
 Example: given a pair of strings, then return the Hamming distance.
 
 ```rust
-use similarity_trait::Similarity;
+use similarity_trait::SimilarityIO;
 struct MyStruct;
 
-impl Similarity<(&str, &str), usize> for MyStruct {
+impl SimilarityIO<(&str, &str), usize> for MyStruct {
     /// Similarity of a pair of strings via Hamming distance.
     fn similarity(pair: (&str, &str)) -> usize {
         pair.0.chars().zip(pair.1.chars()).filter(|(c1, c2)| c1 != c2).count()
@@ -109,10 +100,10 @@ Example: given a collection of strings, then return the maximum Hamming
 distance.
 
 ```rust
-use similarity_trait::Similarity;
+use similarity_trait::SimilarityIO;
 struct MyStruct;
 
-impl Similarity<Vec<&str>, usize> for MyStruct {
+impl SimilarityIO<Vec<&str>, usize> for MyStruct {
     /// Similarity of a collection of strings via maximum Hamming distance.
     fn similarity(collection: Vec<&str>) -> usize {
         let mut max = 0;

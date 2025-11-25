@@ -12,10 +12,10 @@
 //! hamming distance: 2
 //! ```
 
-use similarity_trait::Similarity;
+use similarity_trait::SimilarityIO;
 struct HammingDistance;
 
-impl Similarity<(&str, &str), usize> for HammingDistance {
+impl SimilarityIO<(&str, &str), usize> for HammingDistance {
     /// Similarity of a pair of strings via Hamming distance.
     fn similarity(pair: (&str, &str)) -> usize {
         pair.0.chars().zip(pair.1.chars()).filter(|(c1, c2)| c1 != c2).count()

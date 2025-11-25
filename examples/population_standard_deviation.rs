@@ -11,10 +11,10 @@
 //! population standard deviation: 2
 //! ```
 
-use similarity_trait::Similarity;
+use similarity_trait::SimilarityIO;
 struct PopulationStandardDeviation;
 
-impl Similarity<&Vec<f64>, Option<f64>> for PopulationStandardDeviation {
+impl SimilarityIO<&Vec<f64>, Option<f64>> for PopulationStandardDeviation {
     /// Similarity of numbers via population standard deviation
     fn similarity(numbers: &Vec<f64>) -> Option<f64> {
         if numbers.is_empty() { return None }

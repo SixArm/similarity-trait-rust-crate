@@ -12,10 +12,10 @@
 //! levenshtein distance: 5
 //! ```
 
-use similarity_trait::Similarity;
+use similarity_trait::SimilarityIO;
 struct LevenshteinDistance;
 
-impl Similarity<(&str, &str), usize> for LevenshteinDistance {
+impl SimilarityIO<(&str, &str), usize> for LevenshteinDistance {
     fn similarity(input: (&str, &str)) -> usize {
         let (str1, str2) = input;
         let chars1: Vec<char> = str1.chars().collect();
