@@ -12,13 +12,13 @@
 //! percent change: 20
 //! ```
 
-use similarity_trait::Similarity;
+use similarity_trait::SimilarityIO;
 struct PercentChange;
 
-impl Similarity<(i32, i32), f64> for PercentChange {
+impl SimilarityIO<(i32, i32), f64> for PercentChange {
     /// Similarity of numbers via percent change.
-    fn similarity(input: (i32, i32)) -> f64 {
-        (100.0 * (input.1 - input.0) as f64) / i32::abs(input.0) as f64
+    fn similarity(input: (i32, i32)) -> Option<f64> {
+        Some((100.0 * (input.1.checked_sub(input.0)?) as f64) / i32::abs(input.0) as f64)
     }
 }
 
@@ -29,5 +29,5 @@ fn main() {
     let percent_change = PercentChange::similarity((value1, value2));
     println!("value 1: {}", value1);
     println!("value 2: {}", value2);
-    println!("percent change: {}", percent_change)
+    println!("percent change: {}", percent_change.unwrap())
 }

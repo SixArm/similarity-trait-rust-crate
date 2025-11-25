@@ -11,10 +11,10 @@
 //! maximum hamming distance: 5
 //! ```
 
-use similarity_trait::Similarity;
+use similarity_trait::SimilarityIO;
 struct HammingDistance;
 
-impl Similarity<&Vec<String>, usize> for HammingDistance {
+impl SimilarityIO<&Vec<String>, usize> for HammingDistance {
     /// Similarity of a collection of strings via maximum Hamming distance.
     fn similarity(collection: &Vec<String>) -> usize {
         let mut max = 0;
